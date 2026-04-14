@@ -1,5 +1,5 @@
 app_name = "omnexa_agriculture"
-app_title = "Omnexa Agriculture"
+app_title = "ErpGenEx — Agriculture"
 app_publisher = "Omnexa"
 app_description = "Agriculture vertical"
 app_email = "dev@omnexa.com"
