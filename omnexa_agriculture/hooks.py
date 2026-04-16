@@ -8,18 +8,17 @@ app_license = "mit"
 # Apps
 # ------------------
 
-required_apps = ["omnexa_core"]
+required_apps = ["omnexa_core", "omnexa_accounting", "omnexa_hr", "omnexa_services"]
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "omnexa_agriculture",
-# 		"logo": "/assets/omnexa_agriculture/logo.png",
-# 		"title": "Omnexa Agriculture",
-# 		"route": "/omnexa_agriculture",
-# 		"has_permission": "omnexa_agriculture.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "omnexa_agriculture",
+		"logo": "/assets/omnexa_agriculture/agriculture.svg",
+		"title": "Agriculture",
+		"route": "/app/agriculture",
+	}
+]
 
 # Includes in <head>
 # ------------------
@@ -83,7 +82,8 @@ required_apps = ["omnexa_core"]
 # ------------
 
 # before_install = "omnexa_agriculture.install.before_install"
-# after_install = "omnexa_agriculture.install.after_install"
+after_install = "omnexa_agriculture.install.after_install"
+after_migrate = ["omnexa_agriculture.install.after_migrate"]
 
 # Uninstallation
 # ------------
@@ -117,9 +117,14 @@ required_apps = ["omnexa_core"]
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
+permission_query_conditions = {
+	"Farm": "omnexa_agriculture.permissions.farm_query_conditions",
+	"Field Plot": "omnexa_agriculture.permissions.field_plot_query_conditions",
+	"Crop Cycle": "omnexa_agriculture.permissions.crop_cycle_query_conditions",
+	"Livestock Animal": "omnexa_agriculture.permissions.livestock_animal_query_conditions",
+	"Vaccination Record": "omnexa_agriculture.permissions.vaccination_record_query_conditions",
+	"Harvest Record": "omnexa_agriculture.permissions.harvest_record_query_conditions",
+}
 #
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
@@ -137,13 +142,33 @@ required_apps = ["omnexa_core"]
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Farm": {
+		"before_validate": "omnexa_agriculture.permissions.populate_company_branch_from_user_context",
+		"validate": "omnexa_agriculture.permissions.enforce_branch_access_for_doc",
+	},
+	"Field Plot": {
+		"before_validate": "omnexa_agriculture.permissions.populate_company_branch_from_user_context",
+		"validate": "omnexa_agriculture.permissions.enforce_branch_access_for_doc",
+	},
+	"Crop Cycle": {
+		"before_validate": "omnexa_agriculture.permissions.populate_company_branch_from_user_context",
+		"validate": "omnexa_agriculture.permissions.enforce_branch_access_for_doc",
+	},
+	"Livestock Animal": {
+		"before_validate": "omnexa_agriculture.permissions.populate_company_branch_from_user_context",
+		"validate": "omnexa_agriculture.permissions.enforce_branch_access_for_doc",
+	},
+	"Vaccination Record": {
+		"before_validate": "omnexa_agriculture.permissions.populate_company_branch_from_user_context",
+		"validate": "omnexa_agriculture.permissions.enforce_branch_access_for_doc",
+	},
+	"Harvest Record": {
+		"before_validate": "omnexa_agriculture.permissions.populate_company_branch_from_user_context",
+		"validate": "omnexa_agriculture.permissions.enforce_branch_access_for_doc",
+		"on_update": "omnexa_agriculture.accounting_integration.post_ias41_fair_value_journal",
+	},
+}
 
 # Scheduled Tasks
 # ---------------

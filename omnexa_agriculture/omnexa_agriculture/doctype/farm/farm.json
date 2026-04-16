@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:FRM-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "farm_name",
+  "farm_type",
+  "country",
+  "timezone",
+  "operating_currency",
+  "global_gap_cert_no",
+  "global_gap_valid_until",
+  "ifrs_valuation_method",
+  "biological_asset_account",
+  "ias41_gain_loss_account",
+  "company",
+  "branch",
+  "total_area_acre",
+  "status"
+ ],
+ "fields": [
+  {"fieldname": "farm_name", "fieldtype": "Data", "label": "Farm Name", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "farm_type", "fieldtype": "Select", "label": "Farm Type", "options": "Crop\nLivestock\nAquaculture\nMixed", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "country", "fieldtype": "Link", "label": "Country", "options": "Country"},
+  {"fieldname": "timezone", "fieldtype": "Data", "label": "Timezone", "description": "IANA timezone, e.g. Africa/Cairo or Europe/London."},
+  {"fieldname": "operating_currency", "fieldtype": "Link", "label": "Operating Currency", "options": "Currency"},
+  {"fieldname": "global_gap_cert_no", "fieldtype": "Data", "label": "GlobalG.A.P Certificate No"},
+  {"fieldname": "global_gap_valid_until", "fieldtype": "Date", "label": "GlobalG.A.P Valid Until"},
+  {"fieldname": "ifrs_valuation_method", "fieldtype": "Select", "label": "IAS 41 Valuation Method", "options": "Fair Value less Costs to Sell\nCost Model (exception)", "default": "Fair Value less Costs to Sell"},
+  {"fieldname": "biological_asset_account", "fieldtype": "Link", "label": "Biological Asset Account", "options": "GL Account", "description": "Debit/Credit side for biological asset valuation postings."},
+  {"fieldname": "ias41_gain_loss_account", "fieldtype": "Link", "label": "IAS 41 Gain/Loss Account", "options": "GL Account", "description": "P&L account used for fair value gains or losses."},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "total_area_acre", "fieldtype": "Float", "label": "Total Area (Acre)"},
+  {"fieldname": "status", "fieldtype": "Select", "label": "Status", "options": "Planned\nActive\nSuspended", "default": "Active", "in_list_view": 1}
+ ],
+ "links": [
+  {"group": "Land", "link_doctype": "Field Plot", "link_fieldname": "farm"},
+  {"group": "Crop", "link_doctype": "Crop Cycle", "link_fieldname": "farm"},
+  {"group": "Livestock", "link_doctype": "Livestock Animal", "link_fieldname": "farm"}
+ ],
+ "module": "Omnexa Agriculture",
+ "name": "Farm",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1, "share": 1},
+  {"role": "Farm Manager", "read": 1, "write": 1, "create": 1, "delete": 0, "report": 1, "export": 1},
+  {"role": "Agriculture Accountant", "read": 1, "report": 1, "export": 1},
+  {"role": "Farm Worker", "read": 1},
+  {"role": "Desk User", "read": 1, "report": 1}
+ ],
+ "track_changes": 1
+}

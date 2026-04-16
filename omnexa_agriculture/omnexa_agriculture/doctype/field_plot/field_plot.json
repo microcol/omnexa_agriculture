@@ -1,0 +1,36 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:PLT-{YYYY}-{#####}",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "farm",
+  "plot_name",
+  "soil_type",
+  "area_acre",
+  "crop_type",
+  "season",
+  "company",
+  "branch"
+ ],
+ "fields": [
+  {"fieldname": "farm", "fieldtype": "Link", "label": "Farm", "options": "Farm", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "plot_name", "fieldtype": "Data", "label": "Plot Name", "reqd": 1, "in_list_view": 1},
+  {"fieldname": "soil_type", "fieldtype": "Select", "label": "Soil Type", "options": "Clay\nSandy\nSilt\nLoam\nMixed"},
+  {"fieldname": "area_acre", "fieldtype": "Float", "label": "Area (Acre)", "reqd": 1},
+  {"fieldname": "crop_type", "fieldtype": "Data", "label": "Crop Type"},
+  {"fieldname": "season", "fieldtype": "Select", "label": "Season", "options": "Spring\nSummer\nAutumn\nWinter"},
+  {"fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company", "reqd": 1},
+  {"fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch", "reqd": 1}
+ ],
+ "module": "Omnexa Agriculture",
+ "name": "Field Plot",
+ "permissions": [
+  {"role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1, "share": 1},
+  {"role": "Farm Manager", "read": 1, "write": 1, "create": 1, "report": 1, "export": 1},
+  {"role": "Farm Worker", "read": 1},
+  {"role": "Desk User", "read": 1, "report": 1}
+ ],
+ "track_changes": 1
+}

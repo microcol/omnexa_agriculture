@@ -1,0 +1,19 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "disabled": 0,
+ "doctype": "Report",
+ "is_standard": "Yes",
+ "json": "{}",
+ "module": "Omnexa Agriculture",
+ "name": "Farm Cost Profitability",
+ "ref_doctype": "Harvest Record",
+ "report_name": "Farm Cost Profitability",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Farm Manager"},
+  {"role": "Agriculture Accountant"},
+  {"role": "Desk User"}
+ ]
+}
